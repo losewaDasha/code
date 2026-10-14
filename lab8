@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <locale.h>
+#include <math.h>
 
 int one() {
 	int size = 10;
@@ -45,17 +46,19 @@ int two() {
 }
 
 int four() {
-	double a = 0.0, b = 2.0, h, x, y;
+	setlocale(LC_ALL, "RUS");
+	double a = 0.0, b = 2.0, h, x, y, s;
 	double min_y, max_y, min_x, max_x;
 	int one = 1;
 	printf("Введите шаг h: ");
-	if (scanf("%lf", &h)!=1 || h<=0){
+	scanf("%lf", &h);
+	if (h!=1 || h<=0){
 		printf("Некорректный шаг\n");
 		return 1;
 	}
 	printf("\n    x           y\n");
 	printf("-------------------\n");
-	for (x = a, x <= b + 1e-9; x += h) {
+	for (x = a, s <= b + 1e-9; x += h;) {
 		y = x - 3 * cos(1.04 * x) * cos(1.04 * x);
 		printf("%6.2f        %8.4f\n", x, y);
 		if (one) {
@@ -81,7 +84,15 @@ int four() {
 }
 
 int main() {
-	/*one();*/
-	//two();
-	four();
+	setlocale(LC_ALL, "RUS");
+	int s;
+	printf("Выберите номер задания: ");
+	scanf("%d", &s);
+
+	switch (s) {
+	case 1:one();		break;
+	case 2:two();		break;
+	case 3:four();		break;
+	}
+
 }
