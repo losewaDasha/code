@@ -19,17 +19,27 @@ int one() {
 
 int two() {
 	setlocale(LC_ALL, "RUS");
-	int m, n, s = 0, count = 0;
+	int m, n, s = 0, count = 0, ok = 0, neok=0;
 	printf("Введите начало диапазона m: ");
 	scanf("%d", &m);
 	printf("Введите конец диапазона n: ");
-	scanf("%d", &m);
+	scanf("%d", &n);
 	for (int i = m; i >= n; i--) {
 		printf("%d", i);
 		s += i;
 		count++;
+		if (i % 10 == 5 || i % 10 == 0)
+			ok++;
+		else
+			neok++;
 	}
-	printf("\nКоличество чисел, кратных 5: %d\n", count);
-	printf("\nКоличество чисел, не кратных 5: %d\n", s);
+	printf("\nКоличество чисел: %d\n", count);
+	printf("Сумма: %d\n", s);
+	printf("\nКоличество чисел, оканчивающихся на 5: %d\n", ok);
+	printf("\nКоличество чисел, не оканчивающихся на 5: %d\n", neok);
+}
 
+int main() {
+	/*one();*/
+	two();
 }
