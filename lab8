@@ -5,13 +5,13 @@
 int one() {
 	int size = 10;
 	putchar('!');
-	for (int start = 1; start <= size-2; start++) putchar('*');
+	for (int start = 1; start <= size - 2; start++) putchar('*');
 	putchar('!');
 	putchar('\n');
-	for (int start = 1; start <= size/2; start++) putchar('*');
+	for (int start = 1; start <= size / 2; start++) putchar('*');
 	for (int start = 6; start <= size; start++) putchar('!');
 	putchar('\n');
-	for (int start = 1; start <= size/2; start++) {
+	for (int start = 1; start <= size / 2; start++) {
 		putchar('*');
 		putchar('!');
 	}
@@ -19,27 +19,69 @@ int one() {
 
 int two() {
 	setlocale(LC_ALL, "RUS");
-	int m, n, s = 0, count = 0, ok = 0, neok=0;
+	int m;
+	int n;
+	int s = 0;
+	int count = 0;
+	int ok = 0;
+	int neok = 0;
 	printf("Введите начало диапазона m: ");
 	scanf("%d", &m);
 	printf("Введите конец диапазона n: ");
 	scanf("%d", &n);
 	for (int i = m; i >= n; i--) {
-		printf("%d", i);
 		s += i;
 		count++;
-		if (i % 10 == 5 || i % 10 == 0)
+		if (i % 10 == 5 || i % 10 == -5)
 			ok++;
 		else
 			neok++;
 	}
+	double sr = (double)s / count;
 	printf("\nКоличество чисел: %d\n", count);
-	printf("Сумма: %d\n", s);
+	printf("Среднее арифметическое: %.1f\n", sr);
 	printf("\nКоличество чисел, оканчивающихся на 5: %d\n", ok);
 	printf("\nКоличество чисел, не оканчивающихся на 5: %d\n", neok);
 }
 
+int four() {
+	double a = 0.0, b = 2.0, h, x, y;
+	double min_y, max_y, min_x, max_x;
+	int one = 1;
+	printf("Введите шаг h: ");
+	if (scanf("%lf", &h)!=1 || h<=0){
+		printf("Некорректный шаг\n");
+		return 1;
+	}
+	printf("\n    x           y\n");
+	printf("-------------------\n");
+	for (x = a, x <= b + 1e-9; x += h) {
+		y = x - 3 * cos(1.04 * x) * cos(1.04 * x);
+		printf("%6.2f        %8.4f\n", x, y);
+		if (one) {
+			min_y = max_y = y;
+			min_x = max_x = x;
+			one = 0;
+		}
+		else {
+			if (y < min_y) {
+				min_y = y;
+				min_x = x;
+			}
+			if (y > max_y) {
+				max_y = y;
+				max_x = x;
+			}
+		}
+
+	}
+	printf("\nМинимальное значение: y=%.4f при x=%.2f\n", min_y, min_x);
+	printf("\nМаксимальное значение: y=%.4f при x=%.2f\n", max_y, max_x);
+	return 0;
+}
+
 int main() {
 	/*one();*/
-	two();
+	//two();
+	four();
 }
