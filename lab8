@@ -1,0 +1,35 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <locale.h>
+
+int one() {
+	int size = 10;
+	putchar('!');
+	for (int start = 1; start <= size-2; start++) putchar('*');
+	putchar('!');
+	putchar('\n');
+	for (int start = 1; start <= size/2; start++) putchar('*');
+	for (int start = 6; start <= size; start++) putchar('!');
+	putchar('\n');
+	for (int start = 1; start <= size/2; start++) {
+		putchar('*');
+		putchar('!');
+	}
+}
+
+int two() {
+	setlocale(LC_ALL, "RUS");
+	int m, n, s = 0, count = 0;
+	printf("Введите начало диапазона m: ");
+	scanf("%d", &m);
+	printf("Введите конец диапазона n: ");
+	scanf("%d", &m);
+	for (int i = m; i >= n; i--) {
+		printf("%d", i);
+		s += i;
+		count++;
+	}
+	printf("\nКоличество чисел, кратных 5: %d\n", count);
+	printf("\nКоличество чисел, не кратных 5: %d\n", s);
+
+}
